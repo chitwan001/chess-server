@@ -7,7 +7,7 @@ rowsName.reverse()
 class Board:
     def __init__(self,boardData:list[list[str]],maxPlayer:int,movePlayed:str,check:bool) -> None:
         self.boardData = boardData
-        self.maxPlayer = 1
+        self.maxPlayer = maxPlayer
         self.AIColor = 'black'
         self.blackPoints = self.calculatePlayerPoints('black')
         self.whitePoints = self.calculatePlayerPoints('white')
