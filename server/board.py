@@ -1,11 +1,12 @@
 from random import randint as random
 from typing import Any
+from typing import List
 
 colsName = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 rowsName = ['1', '2', '3', '4', '5', '6', '7', '8']
 rowsName.reverse()
 class Board:
-    def __init__(self,boardData:list[list[str]],maxPlayer:int,movePlayed:str,check:bool) -> None:
+    def __init__(self,boardData:List[List[str]],maxPlayer:int,movePlayed:str,check:bool) -> None:
         self.boardData = boardData
         self.maxPlayer = maxPlayer
         self.AIColor = 'black'
@@ -110,7 +111,7 @@ class Board:
 
     def generateActiveSquaresForPawn (self,row:int,col:int,piece:str):
         # for pawn
-        active:list[list[int]] = []
+        active:List[List[int]] = []
         if(row == 1):
            if self.ifPieceOnSquare(row+2,col) == '':
             if self.ifPieceOnSquare(row+1,col) == '':
@@ -132,7 +133,7 @@ class Board:
     
     def generateActiveSquaresForWhitePawn(self,row:int,col:int,piece:str):
        # for pawn
-        active:list[list[int]] = []
+        active:List[List[int]] = []
         if(row == 6):
            if self.ifPieceOnSquare(row-2,col) == '':
             active.append([row-2,col]); #if not moved then 2 squares
@@ -144,7 +145,7 @@ class Board:
 
     def generateActiveSquaresForRook(self,row:int,col:int,piece:str,color:str):
         #for rooks
-        active:list[list[int]] = []
+        active:List[List[int]] = []
            #for down move
         for i in reversed(range(0,row-1)):
           if self.ifPieceOnSquare(i,col) == '':
@@ -183,7 +184,7 @@ class Board:
         return active
 
     def generateActiveSquaresForKnight(self,row:int,col:int,piece:str,color:str):
-        active:list[list[int]] = []
+        active:List[List[int]] = []
         upRow = row + 2;
         if upRow <= 7:
           if col - 1 >= 0:
@@ -224,7 +225,7 @@ class Board:
         return active
     
     def generateActiveSquaresForBishop(self,row:int,col:int,piece:str,color:str):
-        active:list[list[int]] = []
+        active:List[List[int]] = []
         #for down
         if row > 1:
             # for down right
@@ -289,7 +290,7 @@ class Board:
         return active;
     
     def generateActiveSquaresForKing(self,row:int,col:int,piece:str,color:str):
-        active:list[list[int]] = []
+        active:List[List[int]] = []
         # TODO: if not moved can be castled
         # if (!piece.moved:
         #   // king not moved then can be castled right or left
@@ -437,7 +438,7 @@ class Board:
         return 0
 
     def generateSquaresAttackedByBlackPawn(self,row:int,colIndex:int):
-       active: list[str] = [];
+       active: List[str] = [];
        if (row != '1'):
          if (colIndex > 0 & self.ifPieceOnSquare(row+1,colIndex+1) == 'white'):
            #attack to its right
@@ -447,7 +448,7 @@ class Board:
            active.append(colsName[colIndex + 1] + (row - 1));
        return active;
     def generateSquaresAttackedByBlackKing(self,row:int,colIndex:int,playerColor):
-        active: list[str] = [];
+        active: List[str] = [];
         #move up 1 square
         if (row < 8):
           if (self.ifPieceOnSquare(row+1,colIndex) != playerColor):
@@ -484,7 +485,7 @@ class Board:
 
 
     def checkIfSquaresAreAttackedByBlack(self):
-       blackPieces:list[dict[str, Any]]= [];
+       blackPieces:List[dict[str, Any]]= [];
        for row in range(0,8):
           for col in range(0,8):
              if(self.boardData[row][col] != ''):
@@ -494,7 +495,7 @@ class Board:
                     "col": col,
                     "piece": self.boardData[row][col][1]
                  })
-       squaresAttacked:list[str] = [];
+       squaresAttacked:List[str] = [];
        for i in range (0,len(blackPieces)):
         aPiece = blackPieces[i];
         row = aPiece['row']
@@ -573,7 +574,7 @@ class Board:
                blackKing['row'] = row
       if(whiteking['row'] != -1 & whiteking['col'] != -1):
          whitekingMoves = self.generateActiveSquaresForKing(whiteking['row'],whiteking['col'],'wk','white')
-         attackedSquares: list[str] = self.checkIfSquaresAreAttackedByBlack();
+         attackedSquares: List[str] = self.checkIfSquaresAreAttackedByBlack();
          result = True
          for whiteKingMove in whitekingMoves:
             if(attackedSquares.__contains__(whiteKingMove) == False):
@@ -590,7 +591,7 @@ class Board:
                self.whoWon = 'D'
       if(blackKing['row'] != -1 & blackKing['col'] != -1):
          blackKingMoves = self.generateActiveSquaresForKing(blackKing['row'],blackKing['col'],'bk','black')
-         attackedSquares: list[str] = self.generateActiveSquaresForKing(blackKing['row'],blackKing['col'],'bk','black');
+         attackedSquares: List[str] = self.generateActiveSquaresForKing(blackKing['row'],blackKing['col'],'bk','black');
          result = True
          for blackKingMove in blackKingMoves:
             if(attackedSquares.__contains__(blackKingMove) == False):
@@ -653,6 +654,6 @@ class Board:
            return newPos
 
 
-def __init__(boardData:list[list[str]],check:bool) -> Board:
+def __init__(boardData:List[List[str]],check:bool) -> Board:
     board = Board(boardData,1,'',check)
     return board
