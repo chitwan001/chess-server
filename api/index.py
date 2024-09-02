@@ -1,7 +1,6 @@
 import helpers.chessengine as chessengine
 import os
 
-from flask_cors import CORS
 from flask import Flask,jsonify,request
 
 # create and configure the app
