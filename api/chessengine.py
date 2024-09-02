@@ -1,4 +1,4 @@
-import server.board as board
+import api.board as board
 
 class Node:
     def __init__(self,board:board.Board) -> None:

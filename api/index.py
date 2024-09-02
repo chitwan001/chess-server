@@ -1,4 +1,4 @@
-import server.chessengine as chessengine
+import api.chessengine as chessengine
 import os
 
 from flask_cors import CORS
