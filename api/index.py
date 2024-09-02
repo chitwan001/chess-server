@@ -1,6 +1,7 @@
 import helpers.chessengine as chessengine
 import os
 
+from flask_cors import CORS
 from flask import Flask,jsonify,request
 
 # create and configure the app
@@ -9,7 +10,7 @@ app = Flask(__name__)
 #     SECRET_KEY='dev',
 #     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
 # )
-# CORS(app)
+CORS(app)
 # ensure the instance folder exists
 try:
     os.makedirs(app.instance_path)
