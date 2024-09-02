@@ -10,7 +10,7 @@ from flask import Flask,jsonify,request
     #     SECRET_KEY='dev',
     #     DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     # )
-    CORS(app)
+    # CORS(app)
     # ensure the instance folder exists
     try:
         os.makedirs(app.instance_path)
