@@ -9,5 +9,6 @@ packaging==24.1
 -e git+https://github.com/chitwan001/chess-server.git@2398f08284d496359d0a021ae040535ceff21d11#egg=server
 setuptools==74.0.0
 six==1.16.0
+waitress==3.0.0
 Werkzeug==2.2.3
 wheel==0.44.0
